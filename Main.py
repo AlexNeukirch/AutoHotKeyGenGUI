@@ -29,7 +29,7 @@ layout = [
     [sg.Frame(layout=[
     [sg.Radio('information', "RADIO1", default=True, key='piec', size=(10,1)), sg.Radio('change', "RADIO1", key='szesc'), sg.Radio('incident', "RADIO1", key='siedem')]], title='Classification*',title_color='red', relief=sg.RELIEF_SUNKEN, tooltip='Use these to set flags')],
     [sg.Text('Typologia')],
-    [sg.InputCombo(('forwarded to KeepBiz', 'MultiSite', 'DNS configuration', 'Lack of info', 'Manager nic update', 'Inne...'), size=(20, 1), key='osiem'),
+    [sg.InputCombo(('forwarded to KeepBiz', 'MultiSite', 'DNS configuration', 'Lack of info', 'Manager nic update', 'Telesales: Info - product, 'Inne...'), size=(20, 1), key='osiem'),
          sg.InputText('Tylko w przypadku: "Inne..."', key='dziewiec')],
     [sg.Text('Treść')],
     [sg.Multiline(default_text='', size=(80, 5), key='dziesiec')],
@@ -73,7 +73,13 @@ while True:
 
         if values['osiem'] == 'Inne...':
             typologia = values['dziewiec']
-            
+
+        if values['osiem'] == 'Telesales: Info - product':
+            typologia = 'Product info sales telesales web'
+
+        if values['osiem'] == 'forwarded to KeepBiz':
+            typologia = 'transfer svi keepbiz'
+
 
         pyperclip.copy("::" + str(values['jeden']) + """1::\n
 Send, """ + str(values['dwa']) + """
