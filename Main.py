@@ -99,8 +99,8 @@ Send, """ + str(typologia) + """
 Loop, 3 {
 Send, {tab}
 }
-Send, ^v{enter}""" + values['dziesiec'].replace("\n", "{enter}\n") + """
-return\n
+Send, ^v{enter}""" + values['dziesiec'].replace("\n", "{enter}") + """
+\nreturn\n
 ::""" + str(values['jeden']) + """2::\n
 Send, """ + str(values['dwa']) + """
 Send, ^a^c^v
