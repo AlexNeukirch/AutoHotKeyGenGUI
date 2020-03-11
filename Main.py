@@ -29,7 +29,7 @@ layout = [
     [sg.Frame(layout=[
     [sg.Radio('information', "RADIO1", default=True, key='piec', size=(10,1)), sg.Radio('change', "RADIO1", key='szesc'), sg.Radio('incident', "RADIO1", key='siedem')]], title='Classification*',title_color='red', relief=sg.RELIEF_SUNKEN, tooltip='Use these to set flags')],
     [sg.Text('Typologia')],
-    [sg.InputCombo(('forwarded to KeepBiz', 'MultiSite changes', 'DNS configuration', 'Lack of info', 'Manager nic update', 'Inne...'), size=(20, 1), key='osiem'),
+    [sg.InputCombo(('forwarded to KeepBiz', 'MultiSite', 'DNS configuration', 'Lack of info', 'Manager nic update', 'Inne...'), size=(20, 1), key='osiem'),
          sg.InputText('Tylko w przypadku: "Inne..."', key='dziewiec')],
     [sg.Text('Treść')],
     [sg.Multiline(default_text='', size=(80, 5), key='dziesiec')],
@@ -75,8 +75,7 @@ while True:
             typologia = values['dziewiec']
             
 
-        pyperclip.copy("::" + str(values['jeden']) + """1::
-
+        pyperclip.copy("::" + str(values['jeden']) + """1::\n
 Send, """ + str(values['dwa']) + """
 Send, ^a^c^v
 Loop, 6 {
@@ -86,7 +85,7 @@ Send, """ + str(cProduct) + """
 Loop, """ + classification2 + """ {
 Send, {tab}
 }
-Send, {enter}""" + classification + """ Pol
+Send, {enter}""" + classification + """Pol
 Loop, 21 {
 Send, {tab}
 }
@@ -94,12 +93,9 @@ Send, """ + str(typologia) + """
 Loop, 3 {
 Send, {tab}
 }
-Send, ^v{enter}""" + values['dziesiec'].replace("\n", "{enter}") + """
-
-return
-
-::""" + str(values['jeden']) + """2::
-
+Send, ^v{enter}""" + values['dziesiec'].replace("\n", "{enter}\n") + """
+return\n
+::""" + str(values['jeden']) + """2::\n
 Send, """ + str(values['dwa']) + """
 Send, ^a^c^v
 Loop, 4 {
@@ -118,8 +114,7 @@ Loop, 3 {
 Send, {tab}
 }
 Send, ^v{enter}""" + values['dziesiec'].replace("\n", "{enter}") + """
-
-return""")
+\nreturn""")
 
         sg.popup('Informacja',
                     'skrypt został zapisany w schowku')
