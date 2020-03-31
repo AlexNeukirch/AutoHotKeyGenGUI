@@ -6,8 +6,7 @@ import pyperclip
 sg.ChangeLookAndFeel('Dark')
 
 # ------ Menu Definition ------ #
-menu_def = [['File', ['Open', 'Save', 'Exit', 'Properties']],
-            ['Edit', ['Paste', ['Special', 'Normal', ], 'Undo'], ],
+menu_def = [['File', ['Exit']],
             ['Help', 'About...'], ]
 
 # ------ Column Definition ------ #
@@ -23,18 +22,22 @@ layout = [
     [sg.InputText('', key='jeden')],
     [sg.Text('Temat ticketa')],
     [sg.InputText('', key='dwa')],
-    [sg.Text('Customer\'s Product*')],
-    [sg.InputCombo(('none', 'Hosting Web', 'Domain', 'Domain Zone', 'Email MXplan', 'Email PRO', 'Email Exchange', 'Inne...'), size=(20, 1), key='trzy'),
-         sg.InputText('Tylko w przypadku: "Inne..."', key='cztery')],
+    # [sg.Text('Customer\'s Product* - do not use')],
+    # [sg.InputCombo(('none', 'Hosting Web', 'Domain', 'Domain Zone', 'Email MXplan', 'Email PRO', 'Email Exchange', 'Inne...'), size=(20, 1), key='trzy'),
+    #  sg.InputText('Tylko w przypadku: "Inne..."', key='cztery')],
     [sg.Frame(layout=[
-    [sg.Radio('information', "RADIO1", default=True, key='piec', size=(10,1)), sg.Radio('change', "RADIO1", key='szesc'), sg.Radio('incident', "RADIO1", key='siedem')]], title='Classification*',title_color='red', relief=sg.RELIEF_SUNKEN, tooltip='Use these to set flags')],
+    [sg.Radio('information', "RADIO1", default=True, key='piec', size=(10,1)),
+     sg.Radio('change', "RADIO1", key='szesc'),
+     sg.Radio('incident', "RADIO1", key='siedem')]], title='Classification*',title_color='red', relief=sg.RELIEF_SUNKEN)],
     [sg.Text('Typologia')],
-    [sg.InputCombo(('forwarded to KeepBiz', 'MultiSite', 'DNS configuration', 'Lack of info', 'Manager nic update', 'Telesales: Info - product, 'Inne...'), size=(20, 1), key='osiem'),
-         sg.InputText('Tylko w przypadku: "Inne..."', key='dziewiec')],
+    [sg.InputCombo(('forwarded to KeepBiz', 'MultiSite', 'DNS configuration', 'Lack of info', 'Manager nic update', 'Telesales: Info - product', 'Inne...'), size=(20, 1), key='osiem'),
+     sg.InputText('Tylko w przypadku: "Inne..."', key='dziewiec')],
     [sg.Text('Treść')],
     [sg.Multiline(default_text='', size=(80, 5), key='dziesiec')],
     [sg.Text('_'  * 80)],
-    [sg.Button('kopiuj do schowka', tooltip='Kopiuj do schowka'), sg.Button('Exit'), sg.Button('Reset')]
+    [sg.Button('kopiuj do schowka', tooltip='Kopiuj do schowka'),
+     sg.Button('Exit'),
+     sg.Button('Reset')]
 ]
 
 layoutAbout = [[sg.Text('AutoHotKeyGen v.0.6')],
@@ -49,7 +52,7 @@ window = sg.Window('AutoHotKey', layout, default_element_size=(40, 1), grab_anyw
 while True:
     event, values = window.read()
 
-    cProduct = values['trzy']
+    #cProduct = values['trzy']
     typologia = values['osiem']
 
     if event == None or event == "Exit":
@@ -68,8 +71,8 @@ while True:
             classification = "{tab}"
             classification2 = "7"
 
-        if values['trzy'] == 'Inne...':
-            cProduct = values['cztery']
+        # if values['trzy'] == 'Inne...':
+        #     cProduct = values['cztery']
 
         if values['osiem'] == 'Inne...':
             typologia = values['dziewiec']
@@ -84,15 +87,11 @@ while True:
         pyperclip.copy("::" + str(values['jeden']) + """1::\n
 Send, """ + str(values['dwa']) + """
 Send, ^a^c^v
-Loop, 6 {
+Loop, 11 {
 Send, {tab}
 }
-Send, """ + str(cProduct) + """
-Loop, """ + classification2 + """ {
-Send, {tab}
-}
-Send, {enter}""" + classification + """Pol
-Loop, 21 {
+Send, {enter}""" + classification + """Pol{tab}{tab}low{tab}low
+Loop, 18 {
 Send, {tab}
 }
 Send, """ + str(typologia) + """
@@ -104,15 +103,11 @@ return\n
 ::""" + str(values['jeden']) + """2::\n
 Send, """ + str(values['dwa']) + """
 Send, ^a^c^v
-Loop, 4 {
+Loop, 9 {
 Send, {tab}
 }
-Send, """ + str(cProduct) + """
-Loop, """ + classification2 + """ {
-Send, {tab}
-}
-Send, {enter}""" + classification + """Pol
-Loop, 21 {
+Send, {enter}""" + classification + """Pol{tab}{tab}low{tab}low
+Loop, 18 {
 Send, {tab}
 }
 Send, """ + str(typologia) + """
