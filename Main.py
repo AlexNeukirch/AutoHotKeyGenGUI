@@ -130,8 +130,8 @@ Send, ^v{enter}""" + values['dziesiec'].replace("\n", "{enter}") + """
     if event == "Reset":
         window['jeden']('')
         window['dwa']('')
-        window['trzy']('none')
-        window['cztery']('Tylko w przypadku: "Inne..."')
+        #window['trzy']('none')
+        #window['cztery']('Tylko w przypadku: "Inne..."')
         window['piec'](True)
         window['osiem']('Lack of info')
         window['dziewiec']('Tylko w przypadku: "Inne..."')
